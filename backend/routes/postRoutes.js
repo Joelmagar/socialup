@@ -1,17 +1,19 @@
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
-const multer = require("multer");
-const {
+import express from "express";
+import fs from "fs";
+import path from "path";
+import multer from "multer";
+import {
   deletePost,
   likesPost,
   addPost,
   getPost,
   messagePost,
-  addVideo,
-} = require("../controllers/postController");
-const verifyToken = require("../middleware/tokenHandeler");
+} from "../controllers/postController.js";
+import verifyToken from "../middleware/tokenHandeler.js";
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const router = express.Router();
 
 // Ensure 'uploads/' folder exists before saving files
@@ -42,4 +44,4 @@ router
   .delete(deletePost);
 router.route("/post/like").post(likesPost);
 router.route("/post/comment").post(messagePost);
-module.exports = router;
+export default router;

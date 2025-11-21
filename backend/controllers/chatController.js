@@ -1,6 +1,8 @@
-const asyncHandler = require("express-async-handler");
-const Chat = require("../models/chatModel");
-const messagePost = asyncHandler(async (req, res) => {
+import asyncHandler from "express-async-handler";
+import Chat from "../models/chatModel.js";
+
+// msg post
+export const messagePost = asyncHandler(async (req, res) => {
   const { sender, receiver, content } = req.body;
   try {
     const message = new Chat({ sender, receiver, content });
@@ -10,7 +12,8 @@ const messagePost = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-const messageGet = asyncHandler(async (req, res) => {
+// msg get
+export const messageGet = asyncHandler(async (req, res) => {
   const { user1, user2 } = req.query;
   try {
     const messages = await Chat.find({
@@ -25,7 +28,8 @@ const messageGet = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-const messageDelete = asyncHandler(async (req, res) => {
+// msg delete
+export const messageDelete = asyncHandler(async (req, res) => {
   const { id } = req.query;
   try {
     await Chat.findByIdAndDelete(id);
@@ -34,7 +38,8 @@ const messageDelete = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-const messageRecent = asyncHandler(async (req, res) => {
+// msg recent
+export const messageRecent = asyncHandler(async (req, res) => {
   const { userId } = req.params;
   try {
     const recentChats = await Chat.aggregate([
@@ -56,5 +61,3 @@ const messageRecent = asyncHandler(async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-module.exports = { messagePost, messageGet, messageDelete, messageRecent };

@@ -1,15 +1,15 @@
-const express = require("express");
+import express from "express";
+import verifyToken from "../middleware/tokenHandeler.js";
 const router = express.Router();
-const {
+import {
   getContact,
   createContact,
   deleteContact,
   putContact,
-} = require("../controllers/ContactController");
-const verifyToken = require("../middleware/tokenHandeler");
+} from "../controllers/ContactController.js";
 
 router.use(verifyToken);
 router.route("/").get(getContact).post(createContact);
 router.route("/:id").delete(deleteContact).patch(putContact);
 
-module.exports = router;
+export default router;

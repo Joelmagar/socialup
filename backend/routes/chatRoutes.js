@@ -1,13 +1,13 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const {
+import {
   messagePost,
   messageDelete,
   messageGet,
   messageRecent,
-} = require("../controllers/chatController");
+} from "../controllers/chatController.js";
 
 router.route("/").post(messagePost).get(messageGet).delete(messageDelete);
 router.route("/recent/:id").get(messageRecent);
 
-module.exports = router;
+export default router;

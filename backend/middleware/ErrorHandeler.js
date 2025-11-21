@@ -1,4 +1,5 @@
-const { Constants } = require("../Constants");
+import { Constants } from "../Constants.js";
+
 const ErrorHandeler = (err, req, res, next) => {
   const statusCode = res.statusCode ? res.statusCode : 500;
 
@@ -15,7 +16,7 @@ const ErrorHandeler = (err, req, res, next) => {
         title: "Forbidden",
         message: err.message,
         stackTraces: err.stack,
-      }); 
+      });
       break;
     case Constants.UNAUTHORIZED:
       res.json({
@@ -31,7 +32,7 @@ const ErrorHandeler = (err, req, res, next) => {
         stackTraces: err.stack,
       });
       break;
-    case Constants.NOT_FOUND: 
+    case Constants.NOT_FOUND:
       res.json({
         title: "Not found",
         message: err.message,
@@ -41,4 +42,4 @@ const ErrorHandeler = (err, req, res, next) => {
       break;
   }
 };
-module.exports = ErrorHandeler;
+export default ErrorHandeler;

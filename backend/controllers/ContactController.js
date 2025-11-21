@@ -1,17 +1,17 @@
-const asyncHandler = require("express-async-handler");
-const Contact = require("../models/contactModel");
+import asyncHandler from "express-async-handler";
+import Contact from "../models/contactModel.js";
 
-const getContact = asyncHandler(async (req, res) => {
-  const contact = await Contact.find({user_id:req.user.id});
+export const getContact = asyncHandler(async (req, res) => {
+  const contact = await Contact.find({ user_id: req.user.id });
   if (!contact) {
     res.status(404);
     throw new Error("Contact not found.");
   }
- 
+
   res.status(200).json(contact);
 });
 
-const createContact = asyncHandler(async (req, res) => {            
+export const createContact = asyncHandler(async (req, res) => {
   const { name, email, contact } = req.body;
   if (!name || !email || !contact) {
     res.status(400);
@@ -25,7 +25,7 @@ const createContact = asyncHandler(async (req, res) => {
   });
   res.status(201).json(contacts);
 });
-const deleteContact = asyncHandler(async (req, res) => {
+export const deleteContact = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
   if (!contact) {
     res.status(404);
@@ -35,7 +35,7 @@ const deleteContact = asyncHandler(async (req, res) => {
   res.status(200).json(contact);
 });
 
-const putContact = asyncHandler(async (req, res) => {
+export const putContact = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
 
   if (!contact) {
@@ -50,10 +50,3 @@ const putContact = asyncHandler(async (req, res) => {
   );
   res.status(200).json(updatedContact);
 });
-
-module.exports = {
-  getContact,
-  createContact,
-  deleteContact,
-  putContact,
-};

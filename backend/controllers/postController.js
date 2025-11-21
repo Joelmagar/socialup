@@ -1,7 +1,7 @@
-const asyncHandler = require("express-async-handler");
-const Post = require("../models/postModel");
+import asyncHandler from "express-async-handler";
+import Post from "../models/postModel.js";
 
-const addPost = asyncHandler(async (req, res) => {
+export const addPost = asyncHandler(async (req, res) => {
   if (!req.user || !req.user.id) {
     return res.status(401).json({ error: "Unauthorized! Please log in." });
   }
@@ -28,12 +28,12 @@ const addPost = asyncHandler(async (req, res) => {
   res.status(201).json({ message: "Post created successfully", post });
 });
 
-const getPost = asyncHandler(async (req, res) => {
+export const getPost = asyncHandler(async (req, res) => {
   const posts = await Post.find();
   res.json(posts);
 });
 
-const deletePost = asyncHandler(async (req, res) => {
+export const deletePost = asyncHandler(async (req, res) => {
   const deleteItem = await Post.findById(req.query.id);
 
   if (!deleteItem) {
@@ -45,7 +45,7 @@ const deletePost = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Post deleted successfully" });
 });
 
-const likesPost = asyncHandler(async (req, res) => {
+export const likesPost = asyncHandler(async (req, res) => {
   const postId = req.query.id;
   const userId = req.user.id;
 
@@ -68,7 +68,7 @@ const likesPost = asyncHandler(async (req, res) => {
 
   res.json({ message: "Like status updated", likes: post.likes.length });
 });
-const messagePost = asyncHandler(async (req, res) => {
+export const messagePost = asyncHandler(async (req, res) => {
   const postId = req.query.id;
   const { text } = req.body;
 
@@ -92,5 +92,3 @@ const messagePost = asyncHandler(async (req, res) => {
   await findId.save();
   res.status(201).json(findId.comments);
 });
-
-module.exports = { addPost, getPost, deletePost, likesPost, messagePost };

@@ -1,10 +1,10 @@
-const asyncHandler = require("express-async-handler");
-const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+import asyncHandler from "express-async-handler";
+import User from "../models/userModel.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // register
-const register = asyncHandler(async (req, res) => {
+export const register = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
   if (!email || !password || !username) {
     res.status(400);
@@ -29,7 +29,7 @@ const register = asyncHandler(async (req, res) => {
   }
 });
 // login
-const login = asyncHandler(async (req, res) => {
+export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     res.status(400);
@@ -53,13 +53,13 @@ const login = asyncHandler(async (req, res) => {
     res.status(201).json({ accessToken });
     res.json({ message: "login success" });
   } else {
-    res.status(401);
+    res.status(400);
     throw new Error("No such credential found");
   }
   res.json({ message: "login yoh hohoho" });
 });
 // friends
-const friendsAdd = asyncHandler(async (req, res) => {
+export const friendsAdd = asyncHandler(async (req, res) => {
   const friendId = req.query.id; // friend ID from the query
   const userId = req.user.id; // current logged-in user I
 
@@ -94,20 +94,12 @@ const friendsAdd = asyncHandler(async (req, res) => {
 });
 
 // currentuser
-const currentUser = asyncHandler(async (req, res) => {
+export const currentUser = asyncHandler(async (req, res) => {
   const myData = await User.findById(req.user.id);
   res.json(myData);
 });
 // allusers
-const allUsers = asyncHandler(async (req, res) => {
+export const allUsers = asyncHandler(async (req, res) => {
   const allData = await User.find();
   res.json(allData);
 });
-
-module.exports = {
-  register,
-  allUsers,
-  login,
-  currentUser,
-  friendsAdd,
-};
