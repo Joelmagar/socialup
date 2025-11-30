@@ -1,12 +1,9 @@
-import React from "react";
 import { TbArrowsCross } from "react-icons/tb";
 import Modal from "react-modal";
 import Comment from "./Comment";
 import { BiHeart, BiMessage } from "react-icons/bi";
 import { SlShare } from "react-icons/sl";
-import { MdMarkAsUnread } from "react-icons/md";
 import { LuBookMarked } from "react-icons/lu";
-import { BsEmojiFrown, BsEmojiSmile, BsEmojiSmileFill } from "react-icons/bs";
 import { timeAgo } from "./converter";
 
 export default function PostModal({
@@ -39,7 +36,7 @@ export default function PostModal({
       overlayClassName="modal-overlay"
       className={"z-20 absolute"}
     >
-      <div className=" h-[100%] w-[100%] flex justify-center items-center">
+      <div className=" h-full w-full flex justify-center items-center">
         <div className=" h-[90%]   w-[30%] text-black ">
           <img
             src={data?.photo}

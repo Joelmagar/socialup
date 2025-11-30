@@ -21,14 +21,14 @@ function UserPosts({ data, refetch }) {
               <img
                 src={item?.photo}
                 alt=""
-                className="object-contain  transition-all duration-500 cursor-pointer w-[95%] hover:w-[100%] hover:h-[150%] h-[95%]"
+                className="object-contain  transition-all duration-500 cursor-pointer w-[95%] hover:w-full hover:h-[150%] h-[95%]"
               />
             </div>
           ))}
         </div>
       ) : (
         <div className="flex flex-col items-center">
-          <p className="text-5xl  border-white p-2 w-fit border-[2px] text-white  rounded-full">
+          <p className="text-5xl  border-white p-2 w-fit border-2 text-white  rounded-full">
             {" "}
             <MdOutlinePhotoCamera />{" "}
           </p>

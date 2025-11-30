@@ -48,7 +48,7 @@ export default function Suggestions() {
           >
             <div className=" h-[65%]">
               <img
-                className=" h-[100%] object-cover rounded-t-lg w-[100%]"
+                className=" h-full object-cover rounded-t-lg w-full"
                 src={item?.profile ?? "./profile.jpg"}
               />
             </div>

@@ -29,8 +29,8 @@ const Comment = ({ open, data: dataId, refetch, classname }) => {
     });
   };
   return (
-    <div className="w-[100%] h-full flex flex-col justify-between p-3">
-      <div className="w-[100%]  h-full overflow-auto py-5">
+    <div className="w-full h-full flex flex-col justify-between p-3">
+      <div className="w-full  h-full overflow-auto py-5">
         <div className="flex justify-between pb-4  w-full items-center">
           <h1 className="text-[18px] font-bold">Comments</h1>
           <p onClick={() => open(false)} className="text-[25px] ">

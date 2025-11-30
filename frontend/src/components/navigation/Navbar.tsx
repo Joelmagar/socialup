@@ -2,9 +2,11 @@ import { User } from "lucide-react";
 import { BiDoorOpen } from "react-icons/bi";
 import { useState } from "react";
 import ProfileIcon from "../tools/ProfileIcon";
+import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 export default function Navbar() {
   const [toggleProfile, setProfileActive] = useState<Boolean>(false);
-
+  const navigate = useNavigate();
   return (
     <div className="  w-full  h-[7%]  z-10 ">
       <div className="flex h-full  justify-between bg-background md:px-10 p-2   items-center    border-b border-secondary/50">
@@ -29,22 +31,18 @@ export default function Navbar() {
               toggleProfile ? "opacity-100  mt-0 z-20" : "opacity-0 mt-3 -z-20"
             }  duration-150 w-40 top-full right-0 shadow-secondary/20 shadow-[0px_0px_5px_1px]   space-y-3 rounded-2xl bg-background  px-2 p-4`}
           >
-            {[
-              { icon: User, title: "Profile" },
-              { icon: BiDoorOpen, title: "Logout" },
-            ].map((item, index) => (
-              <div
-                className={` items-center flex gap-2   p-2 ${
-                  index === 1
-                    ? "bg-red-600 text-white hover:bg-red-500 rounded-sm "
-                    : "border-secondary hover:text-primary hover:border-b-2"
-                } `}
-                key={item.title}
-              >
-                <item.icon className="" size={20} />
-                <p className={` text-semibold`}> {item.title}</p>
-              </div>
-            ))}
+            <Button
+              variant={"ghost"}
+              onClick={() => navigate("/profile")}
+              className={`items-center flex gap-2 w-full p-2  justify-start  `}
+            >
+              <User size={20} />
+              <p className={` text-semibold`}> Profile</p>
+            </Button>
+            <Button variant={"destructive"} className={`w-full justify-start`}>
+              <BiDoorOpen size={2} />
+              <p className={` text-semibold`}> Logout</p>
+            </Button>
           </div>
         </div>
       </div>

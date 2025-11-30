@@ -10,9 +10,10 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 export default function Landing() {
   const [isScrolled, setIsScrolled] = useState(false);
-
+const navigate = useNavigate()
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -119,7 +120,10 @@ export default function Landing() {
           </div>
         </div>
       </nav>
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <section
+        id="home"
+        className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      >
         {/* Animated background gradient */}
         <div className="absolute inset-0 bg-linear-to-b from-white via-primary/50 to-background" />
 
@@ -269,6 +273,7 @@ export default function Landing() {
               <div className="grid md:grid-cols-2 grid-cols-1 max-w-lg mx-auto items-center justify-center gap-4">
                 <Button
                   size="lg"
+                  onClick={()=>navigate("/login")}
                   className="gradient-primary text-primary-foreground hover:opacity-90 transition-opacity w-full sm:w-auto group"
                 >
                   Start Chatting Now
